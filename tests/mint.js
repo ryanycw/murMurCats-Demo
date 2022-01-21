@@ -49,14 +49,14 @@ describe("Mint NFT with robot", function() {
         owner = accounts[0];
         mintPrice = new BN(web3.utils.toWei('0'));
         quantity = new BN('1');
-        contract = await RugPullFrens.at(process.env.MURMURCAT_TESTCONTRACT_ADDR);
+        contract = await RugPullFrens.at(process.env.RPF_TESTCONTRACT_ADDR);
     });
 
     describe("Minting", function() {
         /*it("Deploy new contract", async function() {
             const contract = await MurMurCat.new();
         });*/
-        it("Mint 3 MMC should return 3 with balanceOf", async function() {
+        it("Mint 1 RPF, balance should be greater than 1 with balanceOf", async function() {
             console.log(accounts);
             //await startPublicSale();
             //let initBalance = web3.utils.fromWei(await web3.eth.getBalance(owner), 'ether');
