@@ -1,6 +1,6 @@
 require("dotenv/config");
 const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
-const MurMurCat = artifacts.require("MurMurCat");
+const RugPullFrens = artifacts.require("RugPullFrens");
 
 async function getCurTime() {
     const blockNum = await web3.eth.getBlockNumber();
@@ -9,14 +9,14 @@ async function getCurTime() {
 }
 
 async function mint(quantity, mintPrice, targetAccount) {
-    await contract.mintPublicSaleCATS(quantity, {from: targetAccount, value: quantity.mul(mintPrice), gas: 429342});
+    await contract.mintFrens(quantity, {from: targetAccount, value: quantity.mul(mintPrice), gas: 208349});
     let balance = await contract.balanceOf(targetAccount);
     console.log(targetAccount, balance.toString());
-    expect(balance).to.be.bignumber.gte(new BN('3'));
+    expect(balance).to.be.bignumber.gte(new BN('1'));
 }
 
 async function iterMint(quantity, mintPrice, accountsList) {
-    await Promise.all(accountsList.slice(1, 11).map(async (account) => {
+    await Promise.all(accountsList.slice(0, 3).map(async (account) => {
         await mint(quantity, mintPrice, account);
     }));
 }
@@ -47,9 +47,9 @@ describe("Mint NFT with robot", function() {
     beforeEach(async function () {
         accounts = await web3.eth.getAccounts();
         owner = accounts[0];
-        mintPrice = new BN(web3.utils.toWei('0.1'));
-        quantity = new BN('3');
-        contract = await MurMurCat.at(process.env.MURMURCAT_TESTCONTRACT_ADDR);
+        mintPrice = new BN(web3.utils.toWei('0'));
+        quantity = new BN('1');
+        contract = await RugPullFrens.at(process.env.MURMURCAT_TESTCONTRACT_ADDR);
     });
 
     describe("Minting", function() {
@@ -57,14 +57,14 @@ describe("Mint NFT with robot", function() {
             const contract = await MurMurCat.new();
         });*/
         it("Mint 3 MMC should return 3 with balanceOf", async function() {
-            //console.log(accounts);
+            console.log(accounts);
             //await startPublicSale();
             //let initBalance = web3.utils.fromWei(await web3.eth.getBalance(owner), 'ether');
             //await distributeAllBudget(accounts);
-            //await iterMint(quantity, mintPrice, accounts);
-            //await contract.mintPublicSaleCATS(new BN('1'), {from: accounts[0], value: new BN('1').mul(mintPrice), gas: 429342});
-            //await contract.mintPublicSaleCATS(new BN('2'), {from: accounts[0], value: new BN('2').mul(mintPrice), gas: 429342});
-            //await contract.mintPublicSaleCATS(new BN('3'), {from: accounts[0], value: new BN('3').mul(mintPrice), gas: 429342});
+            await iterMint(quantity, mintPrice, accounts);
+            //await contract.mintFrens(new BN('1'), {from: accounts[0], value: new BN('1').mul(mintPrice)});
+            //await contract.mintFrens(new BN('2'), {from: accounts[0], value: new BN('2').mul(mintPrice)});
+            //await contract.mintFrens(new BN('3'), {from: accounts[0], value: new BN('3').mul(mintPrice)});
         });
     });
 })

@@ -2,14 +2,17 @@ require("dotenv/config");
 require("@nomiclabs/hardhat-truffle5");
 require("hardhat-gas-reporter");
 
-accInfo = [`0x${process.env.MMC_OWPK}`,
-           `0x${process.env.MMC_PK1}`,]
+accInfo = [`0x${process.env.RPF_PK1}`,
+           `0x${process.env.RPF_PK2}`,
+           `0x${process.env.RPF_PK3}`,]
 
-accInfoTest = [`0x${process.env.MMC_OWPK}`,
-               `0x${process.env.MMC_PK1}`,]
+accInfoTest = [`0x${process.env.RPF_PK1}`,
+               `0x${process.env.RPF_PK2}`,
+               `0x${process.env.RPF_PK3}`,]
 
-accInfoLocal = [{privateKey: `0x${process.env.MMC_OWPK}`, balance: (4.056033348118027032 * 1e18).toString()},
-                {privateKey: `0x${process.env.MMC_PK1}`, balance: (0.35 * 1e18).toString()},]
+accInfoLocal = [{privateKey: `0x${process.env.RPF_PK1}`, balance: (0.2 * 1e18).toString()},
+                {privateKey: `0x${process.env.RPF_PK2}`, balance: (0.2 * 1e18).toString()},
+                {privateKey: `0x${process.env.RPF_PK3}`, balance: (0.2 * 1e18).toString()},]
 
 module.exports = {
   networks: {
